@@ -101,7 +101,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/cdang1234/social-karma-ios-sdk.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/cdang1234/social-karma-ios-sdk.git", :tag => "v#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
