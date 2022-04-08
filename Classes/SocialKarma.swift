@@ -4,12 +4,16 @@ import Foundation
 import FoundationNetworking
 #endif
 
-struct SocialKarma: View {
-    @State var apiKey: String
+public struct SocialKarma: View {
+    public init(apiKey: String) {
+        self.apiKey = apiKey
+    }
+
+    let apiKey: String
     @State var report: String = ""
     @State var placeholder: String = "Additional information (optional)"
-    
-    var body: some View {
+
+    public var body: some View {
         VStack {
             ZStack {
                 if self.report.isEmpty {
