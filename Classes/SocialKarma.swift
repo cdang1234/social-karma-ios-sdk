@@ -10,10 +10,40 @@ public struct SocialKarma: View {
     }
 
     let apiKey: String
+    @State var showingForm: Bool = false
+
+    public var body: some View {     
+        ZStack {
+            Button(action: {
+                showingForm.toggle()
+            }) {
+                // Text("Report")
+                //     .padding(10.0)
+                //     .overlay(
+                //         RoundedRectangle(cornerRadius: 10.0)
+                //             .stroke(lineWidth: 2.0)
+                //     )
+            }
+            .sheet(isPresented: $showingForm) {
+                ReportForm(apiKey: apiKey, showingForm: $showingForm)
+            }
+        }   
+    }
+}
+
+public struct SocialKarmaPreview: PreviewProvider {
+    public static var previews: some View {
+        SocialKarma(apiKey: "Test")
+    }
+}
+
+struct ReportForm: View {
+    let apiKey: String
+    @Binding var showingForm: Bool
     @State var report: String = ""
     @State var placeholder: String = "Additional information (optional)"
 
-    public var body: some View {
+    var body: some View {
         VStack {
             ZStack {
                 if self.report.isEmpty {
@@ -56,6 +86,7 @@ public struct SocialKarma: View {
 
                 task.resume()
                 semaphore.wait()
+                showingForm.toggle()
             }) {
                 Text("Submit")
                     .padding(10.0)
@@ -72,8 +103,9 @@ public struct SocialKarma: View {
     }
 }
 
-struct SocialKarmaPreview: PreviewProvider {
+struct ReportFormPreview: PreviewProvider {
+    @State static var showingForm: Bool = true
     static var previews: some View {
-        SocialKarma(apiKey: "Test")
+        ReportForm(apiKey: "Test", showingForm: $showingForm)
     }
 }
